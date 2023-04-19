@@ -9,7 +9,7 @@
 vps上的vpn被chatgpt封掉，无法使用最新的ai产品
 
 ### 购买海外vps
-aws, 注册后新用户免费试用一年
+aws, 注册后新用户免费使用一年
 
 Linode
 
@@ -18,19 +18,19 @@ digitalocean
 **不要买阿里云等国内的vps，原因你懂的**
 
 ### 搭建服务
-调研了各种方式,耗子叔的文章介绍的很好，<https://github.com/haoel/haoel.github.io>，我们选择了docker gost+https方式
+调研了各种方式,耗子叔的文章介绍的很好，<https://github.com/haoel/haoel.github.io>，
+v2ray和gost的隐蔽强，并且易伪装,但是v2ray的V2Ray+WebSocket+TLS+Nginx配置与使用教程过于复杂,我们选择了docker+gost+https方式
 
 #### 选择ubuntu系统，我选的版本是ubuntu20
 
-gost+https服务比较简单，而且隐蔽性较强
 #### 安装常用工具包
 修改时区为东八区 
 升级系统最新包apt-get update
 安装常用工具 apt-get install wget curl 等
 
-#### 在ubuntu上一键安装gost+https
+#### 购买一个国外域名(www.namecheap.com、name.com、www.godaddy.com、cloudflare.com), 并配置解析到你的vps服务器
 
-##### 购买一个国外域名(www.namecheap.com、name.com、www.godaddy.com、cloudflare.com), 并配置解析到你的vps服务器
+#### 在ubuntu上一键安装gost+https
 
 ##### 执行脚本按指引安装<https://github.com/haoel/haoel.github.io/blob/master/scripts/install.ubuntu.18.04.sh>
 
@@ -58,7 +58,7 @@ Cloudflare 是一个 CDN 服务商，目前国内依然能正常的访问，可�
 ### 访问openai、奈飞等
 Cloudflare Warp 原生 IP
 
-### 各种客户端
+### 连接客户端
 mac OS, gost<https://github.com/ginuerzh/gost/releases>,(注意区分arm和amd)  + ShadowSocks client<https://github.com/shadowsocks/ShadowsocksX-NG/releases>
 
 iOS, ShadowRocket(美区账号付费，可以淘宝苹果gift card)
