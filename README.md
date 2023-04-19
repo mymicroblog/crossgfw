@@ -59,7 +59,7 @@ Cloudflare 是一个 CDN 服务商，目前国内依然能正常的访问，可�
 Cloudflare Warp 原生 IP
 
 ### 各种客户端
-mac OS, gost<https://github.com/ginuerzh/gost/releases>,注意区分arm和amd+ ShadowSocks client
+mac OS, gost<https://github.com/ginuerzh/gost/releases>,(注意区分arm和amd)  + ShadowSocks client<https://github.com/shadowsocks/ShadowsocksX-NG/releases>
 
 iOS, ShadowRocket(美区账号付费，可以淘宝苹果gift card)
 
