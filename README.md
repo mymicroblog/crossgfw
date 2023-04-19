@@ -28,12 +28,15 @@ gost+https服务比较简单，而且隐蔽性较强
 安装常用工具 apt-get install wget curl 等
 
 2.在ubuntu上一键安装gost+https
-2.1购买一个国外域名(www.namecheap.com、name.com、www.godaddy.com、cloudflare.com),并配置解析到你的vps服务器
+
+2.1购买一个国外域名(www.namecheap.com、name.com、www.godaddy.com、cloudflare.com), 并配置解析到你的vps服务器
+
 2.2执行脚本按指引安装<https://github.com/haoel/haoel.github.io/blob/master/scripts/install.ubuntu.18.04.sh>
+
 有如下步骤:
 
 其中第3、4步需要输入你的刚注册的域名生成ssl证书，而证书申请需要访问80端口网站，
-所以在这里需要先安装nginx, apt-get install nginx 安装后执行nginx启动
+所以在这里需要先安装nginx, apt-get install nginx 安装后执行nginx启动,使用nginx的默认配置即可
 
 1) 安装 TCP BBR 拥塞控制算法，自动修改内核参数
 2) 安装 Docker 服务程序
