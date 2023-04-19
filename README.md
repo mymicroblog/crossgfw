@@ -42,11 +42,11 @@ gost+https服务比较简单，而且隐蔽性较强
 2) 安装 Docker 服务程序
 3) 创建 SSL 证书，
 4) 安装 Gost HTTP/2 代理服务
-5) 安装 ShadowSocks 代理服务
-6) 安装 VPN/L2TP 服务
-7) 安装 Brook 代理服务
+5) ~~安装 ShadowSocks 代理服务~~
+6) ~~安装 VPN/L2TP 服务~~
+7) ~~安装 Brook 代理服务~~
 8) 创建证书更新 CronJob
-我们只选择1/2/3/4/8,第四部需要输入域名、端口（避开nginx的443）gost认证的账号和密码
+我们只选择1/2/3/4/8,第四部需要输入域名、端口（避开nginx的443）gost认证的账号、密码
 
 
 ### 防止vps被封禁
