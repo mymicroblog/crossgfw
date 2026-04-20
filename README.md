@@ -1,66 +1,61 @@
-# 正确上网最佳实践
+# 正确上网最佳实践 (Best Practice for Cross-GFW)
 
+[English](README_EN.md) | 中文
 
-### 为啥有这篇文章
-目前依然很多人，包括程序员不会科学上网
+本项目旨在提供一种稳定、安全且易于维护的科学上网方案，特别针对程序员及需要访问 AI 工具（如 ChatGPT）的用户。
 
-购买的vpn容易被封，不够稳定
+## 为什么选择本方案？
 
-vps上的vpn被chatgpt封掉，无法使用最新的ai产品
+| 特性 | 本方案 (GOST + HTTPS) | 常见 VPN / 机场 | 自建 V2Ray (复杂版) |
+| :--- | :--- | :--- | :--- |
+| **稳定性** | 极高 (TLS 伪装) | 易被封禁 | 高 |
+| **易用性** | 脚本一键安装 | 简单但质量参差不齐 | 复杂 (需配置 Nginx/TLS) |
+| **安全性** | 强 (HTTPS 隧道) | 中 (取决于服务商) | 强 |
+| **AI 支持** | 支持 (配合 Warp) | 经常被 OpenAI 屏蔽 | 支持 |
 
-### 购买海外vps
-aws, 注册后新用户免费使用一年
+---
 
-Linode
+## 快速开始
 
-digitalocean
+### 1. 准备工作
+- **域名**: 购买一个海外域名 (如 `Namecheap`, `GoDaddy`, `Cloudflare`)。
+- **VPS**: 推荐海外 VPS 提供商：
+  - **AWS**: 新用户免费一年。
+  - **Linode / DigitalOcean**: 稳定可靠。
+  - ⚠️ **警告**: 请勿使用阿里云、腾讯云等国内厂商的海外节点。
 
-**不要买阿里云等国内的vps，原因你懂的**
+### 2. 服务端搭建
+建议使用 **Ubuntu 20.04+**。
 
-### 搭建服务
-调研了各种方式,耗子叔的文章介绍的很好，<https://github.com/haoel/haoel.github.io>，
-v2ray和gost的隐蔽强，并且易伪装,但是v2ray的V2Ray+WebSocket+TLS+Nginx配置与使用教程过于复杂,我们选择了docker+gost+https方式
+1. **基础环境**:
+   ```bash
+   apt-get update && apt-get install -y wget curl nginx
+   systemctl start nginx
+   ```
+2. **一键安装脚本**:
+   执行 [haoel 的安装脚本](https://github.com/haoel/haoel.github.io/blob/master/scripts/install.ubuntu.18.04.sh) 并按指引操作。
+   > **关键步骤**: 脚本运行中会要求输入域名以申请 SSL 证书（需确保 80 端口已开放并由 Nginx 响应）。
+3. **功能选择**:
+   安装过程中，仅建议选择以下项：
+   - `1` (TCP BBR 优化)
+   - `2` (Docker 服务)
+   - `3` (创建 SSL 证书)
+   - `4` (安装 GOST HTTP/2 代理)
+   - `8` (证书更新 CronJob)
 
-#### 选择ubuntu系统，我选的版本是ubuntu20
+### 3. 防护与优化 (进阶)
+- **防止 IP 被封**: 将域名托管至 **Cloudflare**，开启 `Proxied` (小黄云)，SSL/TLS 选择 `Full`。
+- **访问 OpenAI / Netflix**: 使用 **Cloudflare Warp** 获取原生 IP 支撑。
 
-#### 安装常用工具包
-修改时区为东八区 
-升级系统最新包apt-get update
-安装常用工具 apt-get install wget curl 等
+---
 
-#### 购买一个国外域名(www.namecheap.com、name.com、www.godaddy.com、cloudflare.com), 并配置解析到你的vps服务器
+## 客户端配置
 
-#### 在ubuntu上一键安装gost+https
+- **macOS**: [GOST](https://github.com/ginuerzh/gost/releases) + [ShadowsocksX-NG](https://github.com/shadowsocks/ShadowsocksX-NG/releases)
+- **iOS**: [Shadowrocket](https://apps.apple.com/us/app/shadowrocket/id932747118) (需美区账号)
+- **Android**: [Shadowsocks + GOST Plugin](https://github.com/xausky/ShadowsocksGostPlugin)
 
-##### 执行脚本按指引安装<https://github.com/haoel/haoel.github.io/blob/master/scripts/install.ubuntu.18.04.sh>
+---
 
-有如下步骤:
-
-其中第3、4步需要输入你的刚注册的域名生成ssl证书，而证书申请需要访问80端口网站，
-所以在这里需要先安装nginx, apt-get install nginx 安装后执行nginx启动,使用nginx的默认配置即可
-
-1) 安装 TCP BBR 拥塞控制算法，自动修改内核参数
-2) 安装 Docker 服务程序
-3) 创建 SSL 证书，
-4) 安装 Gost HTTP/2 代理服务，安装完自动启动，netsat -ntlp，查看端口和服务是否安装ok
-5) ~~安装 ShadowSocks 代理服务~~
-6) ~~安装 VPN/L2TP 服务~~
-7) ~~安装 Brook 代理服务~~
-8) 创建证书更新 CronJob
-我们只选择1/2/3/4/8,第四部需要输入域名、端口（避开nginx的443）gost认证的账号、密码
-
-
-### 防止vps被封禁
-Cloudflare 是一个 CDN 服务商，目前国内依然能正常的访问，可以作为跳板来实现翻墙。
-注册 Cloudflare 帐号，并有一个空闲域名（三级域名即可），交给 Cloudflare 托管并将域名指向被封的 VPS IP，注意开启 Proxied 并且 SSL-TLS 使用 Flexible 选项。
-域名套上cloudflare，防止真实ip被抓到
-
-### 访问openai、奈飞等
-Cloudflare Warp 原生 IP
-
-### 连接客户端
-mac OS, gost<https://github.com/ginuerzh/gost/releases>,(注意区分arm和amd)  + ShadowSocks client<https://github.com/shadowsocks/ShadowsocksX-NG/releases>
-
-iOS, ShadowRocket(美区账号付费，可以淘宝苹果gift card)
-
-Android <https://github.com/xausky/ShadowsocksGostPlugin>
+## 协议
+本项目采用 [MIT License](LICENSE)。
