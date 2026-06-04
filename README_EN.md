@@ -1,61 +1,61 @@
-# Best Practice for Cross-GFW
+# 正确上网最佳实践 (Best Practice for Cross-GFW)
 
-English | [中文](README.md)
+[English](README.md) | 中文
 
-This project provides a stable, secure, and easy-to-maintain solution for bypassing internet censorship, specifically designed for developers and users who need reliable access to AI tools like ChatGPT.
+本项目旨在提供一种稳定、安全且易于维护的科学上网方案，特别针对程序员及需要访问 AI 工具（如 ChatGPT）的用户。
 
-## Why Choose This Solution?
+## 为什么选择本方案？
 
-| Feature | This Solution (GOST + HTTPS) | Typical VPNs | Manual V2Ray (Complex) |
+| 特性 | 本方案 (GOST + HTTPS) | 常见 VPN / 机场 | 自建 V2Ray (复杂版) |
 | :--- | :--- | :--- | :--- |
-| **Stability** | Excellent (TLS obfuscation) | Easy to block | High |
-| **Ease of Use** | One-click script | Simple but unreliable | Complex (Nginx/TLS setup) |
-| **Security** | Strong (HTTPS tunnel) | Medium (Provider-dependent) | Strong |
-| **AI Support** | Yes (via Warp) | Often blocked by OpenAI | Yes |
+| **稳定性** | 极高 (TLS 伪装) | 易被封禁 | 高 |
+| **易用性** | 脚本一键安装 | 简单但质量参差不齐 | 复杂 (需配置 Nginx/TLS) |
+| **安全性** | 强 (HTTPS 隧道) | 中 (取决于服务商) | 强 |
+| **AI 支持** | 支持 (配合 Warp) | 经常被 OpenAI 屏蔽 | 支持 |
 
 ---
 
-## Quick Start
+## 快速开始
 
-### 1. Prerequisites
-- **Domain**: Purchase a non-Chinese domain (e.g., `Namecheap`, `GoDaddy`, `Cloudflare`).
-- **VPS**: Recommended overseas VPS providers:
-  - **AWS**: One year free for new users.
-  - **Linode / DigitalOcean**: Reliable and stable.
-  - ⚠️ **Warning**: Do NOT use overseas nodes from Chinese providers like Alibaba Cloud or Tencent Cloud.
+### 1. 准备工作
+- **域名**: 购买一个海外域名 (如 `Namecheap`, `GoDaddy`, `Cloudflare`)。
+- **VPS**: 推荐海外 VPS 提供商：
+  - **AWS**: 新用户免费一年。
+  - **Linode / DigitalOcean**: 稳定可靠。
+  - ⚠️ **警告**: 请勿使用阿里云、腾讯云等国内厂商的海外节点。
 
-### 2. Server Setup
-Recommended OS: **Ubuntu 20.04+**.
+### 2. 服务端搭建
+建议使用 **Ubuntu 20.04+**。
 
-1. **Environment**:
+1. **基础环境**:
    ```bash
    apt-get update && apt-get install -y wget curl nginx
    systemctl start nginx
    ```
-2. **One-Click Script**:
-   Execute [haoel's installation script](https://github.com/haoel/haoel.github.io/blob/master/scripts/install.ubuntu.18.04.sh) and follow the prompts.
-   > **Key Step**: The script will ask for your domain to apply for an SSL certificate (ensure port 80 is open and handled by Nginx).
-3. **Feature Selection**:
-   During installation, only select the following:
-   - `1` (TCP BBR optimization)
-   - `2` (Docker service)
-   - `3` (Create SSL certificate)
-   - `4` (Install GOST HTTP/2 proxy)
-   - `8` (Certificate update CronJob)
+2. **一键安装脚本**:
+   执行 [haoel 的安装脚本](https://github.com/haoel/haoel.github.io/blob/master/scripts/install.ubuntu.18.04.sh) 并按指引操作。
+   > **关键步骤**: 脚本运行中会要求输入域名以申请 SSL 证书（需确保 80 端口已开放并由 Nginx 响应）。
+3. **功能选择**:
+   安装过程中，仅建议选择以下项：
+   - `1` (TCP BBR 优化)
+   - `2` (Docker 服务)
+   - `3` (创建 SSL 证书)
+   - `4` (安装 GOST HTTP/2 代理)
+   - `8` (证书更新 CronJob)
 
-### 3. Protection & Optimization (Advanced)
-- **Prevent IP Blocking**: Host your domain on **Cloudflare**, enable `Proxied`, and set SSL/TLS to `Full`.
-- **OpenAI / Netflix Access**: Use **Cloudflare Warp** to obtain a native IP.
+### 3. 防护与优化 (进阶)
+- **防止 IP 被封**: 将域名托管至 **Cloudflare**，开启 `Proxied` (小黄云)，SSL/TLS 选择 `Full`。
+- **访问 OpenAI / Netflix**: 使用 **Cloudflare Warp** 获取原生 IP 支撑。
 
 ---
 
-## Client Configuration
+## 客户端配置
 
 - **macOS**: [GOST](https://github.com/ginuerzh/gost/releases) + [ShadowsocksX-NG](https://github.com/shadowsocks/ShadowsocksX-NG/releases)
-- **iOS**: [Shadowrocket](https://apps.apple.com/us/app/shadowrocket/id932747118) (Requires US App Store account)
+- **iOS**: [Shadowrocket](https://apps.apple.com/us/app/shadowrocket/id932747118) (需美区账号)
 - **Android**: [Shadowsocks + GOST Plugin](https://github.com/xausky/ShadowsocksGostPlugin)
 
 ---
 
-## License
-This project is licensed under the [MIT License](LICENSE).
+## 协议
+本项目采用 [MIT License](LICENSE)。
